@@ -3,7 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Game events</name>
     <events>
-        <variable constant="1" name="GAME_NAME" sid="2783528050303823" static="0" type="text">findBar</variable>
+        <variable constant="1" name="GAME_NAME" sid="2783528050303823" static="0" type="text">findbar</variable>
         <variable constant="1" name="INSTANCE_NAME" sid="313861102059647" static="0" type="text">default</variable>
         <variable constant="1" name="ROOM_NAME" sid="9805164627532191" static="0" type="text">main</variable>
         <event-group description="Functions to manage updating the LogText object as messages are added." sid="1791290436183513" title="Message log">
