@@ -4,7 +4,7 @@
     <sid>7127848367653625</sid>
     <event-sheet>Login events</event-sheet>
     <size>
-        <width>1024</width>
+        <width>1280</width>
         <height>768</height>
     </size>
     <margins>
@@ -39,10 +39,10 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>512</x>
+                        <x>640.5</x>
                         <y>384</y>
                         <z>0</z>
-                        <width>1024</width>
+                        <width>1281</width>
                         <height>768</height>
                         <depth>0</depth>
                         <hotspotX>0.5</hotspotX>
@@ -66,7 +66,7 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>-22</x>
+                        <x>106</x>
                         <y>158</y>
                         <z>0</z>
                         <width>1025</width>
@@ -93,8 +93,8 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>30.950195313</x>
-                        <y>331.048309326</y>
+                        <x>87</x>
+                        <y>334</y>
                         <z>0</z>
                         <width>204</width>
                         <height>70</height>
@@ -121,8 +121,8 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>296.202636719</x>
-                        <y>326</y>
+                        <x>362</x>
+                        <y>331</y>
                         <z>0</z>
                         <width>425.797332764</width>
                         <height>51</height>
@@ -145,8 +145,8 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>779.752563477</x>
-                        <y>325.950195313</y>
+                        <x>792</x>
+                        <y>330</y>
                         <z>0</z>
                         <width>116.221801758</width>
                         <height>51</height>
@@ -163,11 +163,11 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>194.739013672</x>
-                        <y>541.916748047</y>
+                        <x>324.739013672</x>
+                        <y>598.090087891</y>
                         <z>0</z>
-                        <width>568.577026367</width>
-                        <height>141.346557617</height>
+                        <width>528</width>
+                        <height>85</height>
                         <depth>0</depth>
                         <hotspotX>0</hotspotX>
                         <hotspotY>0</hotspotY>
@@ -177,7 +177,7 @@
                 </instance>
                 <instance type="FormLabel" uid="6">
                     <properties>
-                        <text>Setas ou WASD para se mover, Clicando com o botão esquerdo do mouse o personagem segue o cursor</text>
+                        <text>Setas ou WASD ou Clicando na tela</text>
                         <initial-visibility>Visible</initial-visibility>
                         <font>Arial,-32,400,0</font>
                         <color>0,0,0</color>
@@ -190,11 +190,11 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>200.940765381</x>
-                        <y>550.106201172</y>
+                        <x>309.002441406</x>
+                        <y>620.606201172</y>
                         <z>0</z>
-                        <width>568.004821777</width>
-                        <height>128.606170654</height>
+                        <width>568</width>
+                        <height>50</height>
                         <depth>0</depth>
                         <hotspotX>0</hotspotX>
                         <hotspotY>0</hotspotY>

@@ -21,6 +21,7 @@
         <plugin author="Scirra" id="Text" version="1">Text</plugin>
         <plugin author="Scirra" id="TextBox" version="1">Text box</plugin>
         <plugin author="Scirra" id="TiledBg" version="1">Tiled Background</plugin>
+        <plugin author="Scirra" id="Touch" version="1">Touch</plugin>
     </used-plugins>
     <used-behaviors>
         <behavior author="Scirra" id="Bullet" version="1">Bullet</behavior>
@@ -32,8 +33,8 @@
         <configuration exporter-descname="HTML5" exporter-id="html5" name="HTML5" />
     </configurations>
     <window-size>
-        <width>1024</width>
-        <height>768</height>
+        <width>1280</width>
+        <height>720</height>
     </window-size>
     <pixel-rounding>0</pixel-rounding>
     <preview-effects>1</preview-effects>
@@ -41,7 +42,7 @@
     <configuration-settings>
         <prop name="Clear background">Yes</prop>
         <prop name="Enable WebGL">On</prop>
-        <prop name="Fullscreen in browser">Letterbox scale</prop>
+        <prop name="Fullscreen in browser">Scale outer</prop>
         <prop name="Fullscreen scaling">High quality</prop>
         <prop name="Loader style">Progress bar &amp; logo</prop>
         <prop name="Orientations">Any</prop>
@@ -82,13 +83,12 @@
             </object-type>
         </object-folder>
         <object-folder name="Game">
-            <object-type name="AimSpot" sid="5367249510645388">
+            <object-type name="Target" sid="5367249510645388">
                 <plugin id="Sprite" />
                 <container>
                     <type>Peer</type>
                     <type>PeerName</type>
-                    <type>AimSpot</type>
-                    <type>PeerLaser</type>
+                    <type>Target</type>
                 </container>
                 <animation-folder>
                     <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4688064039399014" speed="5">
@@ -120,10 +120,6 @@
                     <instance-variable name="lookatx" sid="252179545024477" type="number" />
                     <instance-variable name="lookaty" sid="7875672039869166" type="number" />
                     <instance-variable name="inputs" sid="7193520477676959" type="number" />
-                    <instance-variable name="health" sid="7889077929084364" type="number" />
-                    <instance-variable name="kills" sid="7316904981992262" type="number" />
-                    <instance-variable name="deaths" sid="5714395402371372" type="number" />
-                    <instance-variable name="FirstShot" sid="90044639766638" type="boolean" />
                     <instance-variable name="lasthitbypeerid" sid="6358509132487602" type="string" />
                 </instance-variables>
                 <behaviors>
@@ -140,8 +136,7 @@
                 <container>
                     <type>Peer</type>
                     <type>PeerName</type>
-                    <type>AimSpot</type>
-                    <type>PeerLaser</type>
+                    <type>Target</type>
                 </container>
                 <animation-folder>
                     <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="8757907285038088" speed="5">
@@ -161,27 +156,12 @@
                     </animation>
                 </animation-folder>
             </object-type>
-            <object-type name="PeerLaser" sid="8723584082822782">
-                <plugin id="Sprite" />
-                <container>
-                    <type>Peer</type>
-                    <type>PeerName</type>
-                    <type>AimSpot</type>
-                    <type>PeerLaser</type>
-                </container>
-                <animation-folder>
-                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="5539788048392851" speed="5">
-                        <frame duration="1" hotspotX="0" hotspotY="0.5" />
-                    </animation>
-                </animation-folder>
-            </object-type>
             <object-type name="PeerName" sid="8558169904638055">
                 <plugin id="Text" />
                 <container>
                     <type>Peer</type>
                     <type>PeerName</type>
-                    <type>AimSpot</type>
-                    <type>PeerLaser</type>
+                    <type>Target</type>
                 </container>
             </object-type>
             <object-type name="LogText" sid="9807058034727937">
@@ -233,11 +213,14 @@
         <object-type name="Browser" sid="9630530190288802">
             <plugin id="Browser" />
         </object-type>
+        <object-type name="Touch" sid="493610537228246">
+            <plugin id="Touch" />
+        </object-type>
     </object-folder>
     <families>
         <family name="AimSpotFamily" plugin-id="Sprite" sid="4858349354391145">
             <members>
-                <member>AimSpot</member>
+                <member>Target</member>
             </members>
         </family>
     </families>
@@ -255,6 +238,11 @@
         <global-instance type="Keyboard" uid="15" />
         <global-instance type="Function" uid="30" />
         <global-instance type="Browser" uid="9" />
+        <global-instance type="Touch" uid="16">
+            <properties>
+                <use-mouse-input>Yes</use-mouse-input>
+            </properties>
+        </global-instance>
     </global-instances>
     <sounds-folder />
     <music-folder />

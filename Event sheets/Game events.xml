@@ -129,27 +129,6 @@
                             <param id="3" name="Interpolation">0</param>
                             <param id="4" name="Client value tag">&quot;inputs&quot;</param>
                         </action>
-                        <action id="12" name="Sync instance variable" sid="1877625592048931" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|health</param>
-                            <param id="2" name="Precision">3</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
-                        <action disabled="1" id="12" name="Sync instance variable" sid="6184510421650488" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|kills</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
-                        <action disabled="1" id="12" name="Sync instance variable" sid="4210123733721239" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|deaths</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
                         <action id="1" name="Connect" sid="7537126393271732" type="Multiplayer">
                             <param id="0" name="Server">&quot;wss://multiplayer.scirra.com&quot;</param>
                         </action>
@@ -264,7 +243,7 @@
                     <actions>
                         <action id="0" name="Call function" sid="6681798860206169" type="Function">
                             <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Signalling error: &quot; &amp; Multiplayer.ErrorMessage</param>
+                            <param id="1" name="Parameter {n}">&quot;Erro de Conexão: &quot; &amp; Multiplayer.ErrorMessage</param>
                         </action>
                     </actions>
                 </event-block>
@@ -275,7 +254,7 @@
                     <actions>
                         <action id="0" name="Call function" sid="4110183784093897" type="Function">
                             <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Signalling: left room&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Bebeu demais e caiu..&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -286,7 +265,7 @@
                     <actions>
                         <action id="0" name="Call function" sid="3541078117429122" type="Function">
                             <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Bebeu demais e caiu...&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Bebeu demais e foi expulso do bar...&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -372,16 +351,7 @@
                                     <param id="2" name="Value">Multiplayer.MyID</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="14" name="Set client state" sid="1498586099997287" type="Multiplayer">
-                                    <param id="0" name="Tag">&quot;lookx&quot;</param>
-                                    <param id="1" name="Value">Mouse.X</param>
-                                </action>
-                                <action id="14" name="Set client state" sid="3799643404182033" type="Multiplayer">
-                                    <param id="0" name="Tag">&quot;looky&quot;</param>
-                                    <param id="1" name="Value">Mouse.Y</param>
-                                </action>
-                            </actions>
+                            <actions />
                             <sub-events>
                                 <comment>For each of the five controls, update the corresponding bit in &apos;inputs&apos; to 1 for pressed or 0 for not pressed.</comment>
                                 <event-block any="1" sid="1432909299591165">
@@ -492,13 +462,19 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="9121487991405259">
+                                <event-block any="1" sid="9121487991405259">
                                     <conditions>
-                                        <condition id="2" name="Mouse button is down" sid="4103886747106164" type="Mouse">
-                                            <param id="0" name="Mouse button">0</param>
-                                        </condition>
+                                        <condition id="2" name="Is in touch" sid="536157595448121" type="Touch" />
                                     </conditions>
                                     <actions>
+                                        <action id="14" name="Set client state" sid="1498586099997287" type="Multiplayer">
+                                            <param id="0" name="Tag">&quot;lookx&quot;</param>
+                                            <param id="1" name="Value">Touch.X</param>
+                                        </action>
+                                        <action id="14" name="Set client state" sid="3799643404182033" type="Multiplayer">
+                                            <param id="0" name="Tag">&quot;looky&quot;</param>
+                                            <param id="1" name="Value">Touch.Y</param>
+                                        </action>
                                         <action id="-10" name="Set value" sid="1319002616569666" type="Peer">
                                             <param id="0" name="Instance variable">inputs</param>
                                             <param id="1" name="Value">setbit(Self.inputs, 4, 1)</param>
@@ -593,6 +569,39 @@
                                     <actions>
                                         <action behavior="8Direction" id="7" name="Simulate control" sid="2350106889447663" type="Peer">
                                             <param id="0" name="Control">3</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="212991933175238">
+                            <conditions>
+                                <condition id="-11" name="For Each" sid="128923123194282" type="System">
+                                    <param id="0" name="Object">Peer</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <comment>We only want to deal damage the first time players shoot, as opposed to every tick while they are shooting. &apos;Trigger once&apos; doesn&apos;t work per-instance, so we simulate the same thing using a &apos;FirstShot&apos; boolean in each Peer. If they&apos;re not shooting FirstShot is set to true; when they are shooting, if FirstShot is true, it checks to deal damage and sets FirstShot to false. If they are shooting and FirstShot is false, no more damage is dealt.</comment>
+                                <event-block sid="802987307623237">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="833488291375747" type="System">
+                                            <param id="0" name="First value">getbit(Peer.inputs, 4)</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="339205214270739" type="Target">
+                                            <param id="0" name="X">Peer.lookatx</param>
+                                            <param id="1" name="Y">Peer.lookaty</param>
+                                        </action>
+                                        <action id="-22" name="Set angle toward position" sid="702633351110908" type="Peer">
+                                            <param id="0" name="X">Target.X</param>
+                                            <param id="1" name="Y">Target.Y</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="126533598060192" type="Peer">
+                                            <param id="0" name="Speed">100</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -696,16 +705,25 @@
                                     </actions>
                                 </event-block>
                                 <comment>Note when shooting we still update the same bit in the &apos;inputs&apos; variable that the peers do. This is solely so the common events can treat all objects the same when it comes to shooting: the laser is shown if the bit is set, otherwise it is hidden.</comment>
-                                <event-block sid="8613413220319609">
+                                <event-block any="1" sid="800493487343787">
                                     <conditions>
-                                        <condition id="2" name="Mouse button is down" sid="6660203618605671" type="Mouse">
-                                            <param id="0" name="Mouse button">0</param>
-                                        </condition>
+                                        <condition id="2" name="Is in touch" sid="811778430306207" type="Touch" />
                                     </conditions>
                                     <actions>
-                                        <action id="-10" name="Set value" sid="4829780237147291" type="Peer">
+                                        <action id="14" name="Set client state" sid="646842041287202" type="Multiplayer">
+                                            <param id="0" name="Tag">&quot;lookx&quot;</param>
+                                            <param id="1" name="Value">Touch.X</param>
+                                        </action>
+                                        <action id="14" name="Set client state" sid="253765884309269" type="Multiplayer">
+                                            <param id="0" name="Tag">&quot;looky&quot;</param>
+                                            <param id="1" name="Value">Touch.Y</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="932394846169179" type="Peer">
                                             <param id="0" name="Instance variable">inputs</param>
-                                            <param id="1" name="Value">setbit(self.inputs, 4, 1)</param>
+                                            <param id="1" name="Value">setbit(Self.inputs, 4, 1)</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="839103171835813" type="Target">
+                                            <param id="0" name="Visibility">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -717,6 +735,15 @@
                                         <action id="-10" name="Set value" sid="1699321742129288" type="Peer">
                                             <param id="0" name="Instance variable">inputs</param>
                                             <param id="1" name="Value">setbit(self.inputs, 4, 0)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="905927083986754">
+                                    <conditions />
+                                    <actions>
+                                        <action id="14" name="Set client state" sid="517084721714962" type="Multiplayer">
+                                            <param id="0" name="Tag">&quot;inputs&quot;</param>
+                                            <param id="1" name="Value">Peer.inputs</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -826,197 +853,26 @@
                                             <param id="2" name="Second value">1</param>
                                         </condition>
                                     </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <comment>The way events pick instances becomes a little awkward here: we want to check if this peer&apos;s &apos;AimSpot&apos; is overlapping any other peers. We can&apos;t do that directly, since an &apos;AimSpot is overlapping Peer&apos; condition will only check the current Peer in the for-each loop. So to work around this, we call a TestHit function to do the actual collision test, since function calls reset which objects are picked. We pass the UID of the AimSpot to test a collision for, and the peer ID of the current shooting peer we&apos;re checking for.</comment>
-                                        <event-block sid="1526881880651042">
-                                            <conditions>
-                                                <condition id="-8" name="Is boolean instance variable set" sid="4750924477652231" type="Peer">
-                                                    <param id="0" name="Instance variable">FirstShot</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-13" name="Set boolean" sid="8111685811361797" type="Peer">
-                                                    <param id="0" name="Instance variable">FirstShot</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                                <action id="0" name="Call function" sid="5397281392951141" type="Function">
-                                                    <param id="0" name="Name">&quot;TestHit&quot;</param>
-                                                    <param id="1" name="Parameter {n}">AimSpot.UID{###}Peer.peerid</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                                <event-block sid="1598938070602766">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="4523653995581848" type="System" />
-                                    </conditions>
                                     <actions>
-                                        <action id="-13" name="Set boolean" sid="7362510215786" type="Peer">
-                                            <param id="0" name="Instance variable">FirstShot</param>
-                                            <param id="1" name="Value">1</param>
+                                        <action id="-3" name="Set position" sid="8266768530851442" type="Target">
+                                            <param id="0" name="X">Peer.lookatx</param>
+                                            <param id="1" name="Y">Peer.lookaty</param>
+                                        </action>
+                                        <action id="-22" name="Set angle toward position" sid="512005639939787" type="Peer">
+                                            <param id="0" name="X">Target.X</param>
+                                            <param id="1" name="Y">Target.Y</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="127077139406059" type="Peer">
+                                            <param id="0" name="Speed">100</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="531597637672130" type="Target">
+                                            <param id="0" name="Visibility">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
                         <comment>This function is called when we want to test if a player has hit another player. Parameter 0 is the UID of the AimSpot to test for a collision, which we pick right away. Note we use a family instead of picking AimSpot directly. This is because AimSpot is in a container with Peer, so picking an AimSpot will pick its own Peer and prevent us testing collisions with other peers again. Families pick objects independently of their own objects, so we work with AimSpotFamily, which is a family that just contains AimSpot. Then we can test for a collision between AimSpotFamily and any other Peer.</comment>
-                        <variable constant="0" name="FiringPeerID" sid="7169555401548868" static="0" type="text"></variable>
-                        <event-block disabled="1" sid="44534201788162">
-                            <conditions>
-                                <condition id="0" name="On function" sid="9662834528724759" type="Function">
-                                    <param id="0" name="Name">&quot;TestHit&quot;</param>
-                                </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="1347811673375069" type="AimSpotFamily">
-                                    <param id="0" name="Unique ID">Function.Param(0)</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="2818107253521747" type="System">
-                                    <param id="0" name="Variable">FiringPeerID</param>
-                                    <param id="1" name="Value">Function.Param(1)</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <comment>We must test if &apos;AimSpotFamily&apos; hits any of the peers. However we don&apos;t want to test if it hits the peer that is firing it in the first place.</comment>
-                                <event-block disabled="1" sid="3128142750304508">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="3868667200495435" type="Peer">
-                                            <param id="0" name="Instance variable">peerid</param>
-                                            <param id="1" name="Comparison">1</param>
-                                            <param id="2" name="Value">FiringPeerID</param>
-                                        </condition>
-                                        <condition id="-11" name="For Each" sid="3855171277458598" type="System">
-                                            <param id="0" name="Object">Peer</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <comment>This is where lag compensation happens. We test if the aim spot is overlapping any of the peers. However we must take in to account that the firing peer is seeing all the other peers on a delay. The LagCompensateX/Y/Angle expressions return the position of each Peer that the firing player will have seen them at given their delay. The &apos;moving peer&apos; is the peer being aimed at, and the &apos;from peer&apos; is the peer who is firing. First we save the current position and angle of the object so we can put it back, then we position the peer with the lag-compensated values.</comment>
-                                        <variable constant="0" name="OldX" sid="7043215047058304" static="0" type="number">0</variable>
-                                        <variable constant="0" name="OldY" sid="5086082414305086" static="0" type="number">0</variable>
-                                        <variable constant="0" name="OldAngle" sid="2128981242971121" static="0" type="number">0</variable>
-                                        <event-block disabled="1" sid="921872727640977">
-                                            <conditions />
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="9687664958273837" type="System">
-                                                    <param id="0" name="Variable">OldX</param>
-                                                    <param id="1" name="Value">Peer.X</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="2743902914159741" type="System">
-                                                    <param id="0" name="Variable">OldY</param>
-                                                    <param id="1" name="Value">Peer.Y</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="5874568465077302" type="System">
-                                                    <param id="0" name="Variable">OldAngle</param>
-                                                    <param id="1" name="Value">Peer.Angle</param>
-                                                </action>
-                                                <action id="-3" name="Set position" sid="298404485178533" type="Peer">
-                                                    <param id="0" name="X">Multiplayer.LagCompensateX(Peer.peerid, FiringPeerID)</param>
-                                                    <param id="1" name="Y">Multiplayer.LagCompensateY(Peer.peerid, FiringPeerID)</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="8903269654954992" type="Peer">
-                                                    <param id="0" name="Angle">Multiplayer.LagCompensateAngle(Peer.peerid, FiringPeerID)</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <comment>Now the peer is in its lag-compensated place, we can test if it overlaps the aim spot. If it does we subtract from the health, and remember who hit them last, so we can update their kill count if they die.</comment>
-                                        <event-block disabled="1" sid="767156883342158">
-                                            <conditions>
-                                                <condition id="1" name="Is overlapping another object" sid="4408773394599599" type="Peer">
-                                                    <param id="0" name="Object">AimSpotFamily</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-12" name="Subtract from" sid="2065600161210982" type="Peer">
-                                                    <param id="0" name="Instance variable">health</param>
-                                                    <param id="1" name="Value">3</param>
-                                                </action>
-                                                <action id="-10" name="Set value" sid="2277005137126616" type="Peer">
-                                                    <param id="0" name="Instance variable">lasthitbypeerid</param>
-                                                    <param id="1" name="Value">Function.Param(1)</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <comment>Now we&apos;ve checked for the overlap, we put the peer back to its current position.</comment>
-                                        <event-block disabled="1" sid="117793115270756">
-                                            <conditions />
-                                            <actions>
-                                                <action id="-3" name="Set position" sid="2118486486045714" type="Peer">
-                                                    <param id="0" name="X">OldX</param>
-                                                    <param id="1" name="Y">OldY</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="3034358673945755" type="Peer">
-                                                    <param id="0" name="Angle">OldAngle</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <comment>If a peer has run out of health, we move them back to a random position, reset their health, and add to their death count.</comment>
-                        <event-block disabled="1" sid="2351425807777953">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="2985878936901063" type="Peer">
-                                    <param id="0" name="Instance variable">health</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-3" name="Set position" sid="9699398552955236" type="Peer">
-                                    <param id="0" name="X">random(50, LayoutWidth - 50)</param>
-                                    <param id="1" name="Y">random(50, LayoutHeight - 50)</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="3347510588602451" type="Peer">
-                                    <param id="0" name="Instance variable">health</param>
-                                    <param id="1" name="Value">100</param>
-                                </action>
-                                <action id="-11" name="Add to" sid="6045993592488538" type="Peer">
-                                    <param id="0" name="Instance variable">deaths</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <comment>When a peer died, we also want to increment the kills counter for the last peer who shot them. First of all, we don&apos;t want to give a player a kill for shooting themselves! So long as someone else shot them, we add one to their kill count. Note however we need to pick a different &apos;Peer&apos; to the one that&apos;s died, so we call a function to reset the picked objects again.</comment>
-                                <event-block disabled="1" sid="8487439007661947">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="7594595665311121" type="Peer">
-                                            <param id="0" name="Instance variable">peerid</param>
-                                            <param id="1" name="Comparison">1</param>
-                                            <param id="2" name="Value">Peer.lasthitbypeerid</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="5306035223040866" type="Function">
-                                            <param id="0" name="Name">&quot;AddToKills&quot;</param>
-                                            <param id="1" name="Parameter {n}">Peer.lasthitbypeerid</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <comment>This function simply serves to add to the kill count of a different peer to the one who died. We pick the peer by the function parameter, which is the ID of the last peer who hit them.</comment>
-                        <event-block disabled="1" sid="1746671476529903">
-                            <conditions>
-                                <condition id="0" name="On function" sid="6130511478304956" type="Function">
-                                    <param id="0" name="Name">&quot;AddToKills&quot;</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="8216107202493273" type="Peer">
-                                    <param id="0" name="Instance variable">peerid</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">Function.Param(0)</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-11" name="Add to" sid="8602484860118248" type="Peer">
-                                    <param id="0" name="Instance variable">kills</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <comment>This event relays chat messages to other peers. It&apos;s the same thing as from tutorial 2 (chat room).</comment>
                         <event-block sid="3740149403622605">
                             <conditions>
@@ -1072,28 +928,20 @@
                             <actions>
                                 <action id="-10" name="Set value" sid="67252243349912" type="Peer">
                                     <param id="0" name="Instance variable">lookatx</param>
-                                    <param id="1" name="Value">Mouse.X</param>
+                                    <param id="1" name="Value">Touch.X</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="4570881774384983" type="Peer">
                                     <param id="0" name="Instance variable">lookaty</param>
-                                    <param id="1" name="Value">Mouse.Y</param>
+                                    <param id="1" name="Value">Touch.Y</param>
                                 </action>
                             </actions>
                         </event-block>
                         <comment>All players are pointed at their &apos;lookatx&apos; and &apos;lookaty&apos; variables, and the AimSpot object (in a container with Peer) positioned to the same location to indicate the aim point. The host and peers update these values in different ways, but both always need players to be actually pointing at their look-at positions. We also position the PeerName labels above each peer and set it to their name, so we can see who is who, and display their stats (health, kills and deaths). Finally we make sure the lasers and aim spots appear on the &quot;Lasers&quot; layer, since syncing objects does not always put them on the right layer.</comment>
-                        <event-block sid="5649120662471453">
+                        <event-block sid="734548997170658">
                             <conditions>
-                                <condition id="-1" name="Every tick" sid="4628645942487063" type="System" />
+                                <condition id="-1" name="Every tick" sid="230391221689723" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-22" name="Set angle toward position" sid="1911753413642723" type="Peer">
-                                    <param id="0" name="X">Self.lookatx</param>
-                                    <param id="1" name="Y">Self.lookaty</param>
-                                </action>
-                                <action id="-3" name="Set position" sid="8266768530851442" type="AimSpot">
-                                    <param id="0" name="X">Peer.lookatx</param>
-                                    <param id="1" name="Y">Peer.lookaty</param>
-                                </action>
                                 <action id="-3" name="Set position" sid="3301965992719763" type="PeerName">
                                     <param id="0" name="X">Peer.X</param>
                                     <param id="1" name="Y">Peer.Y - 55</param>
@@ -1104,10 +952,7 @@
                                 <action id="-26" name="Move to layer" sid="7434418277838572" type="Peer">
                                     <param id="0" name="Layer">&quot;Game&quot;</param>
                                 </action>
-                                <action id="-26" name="Move to layer" sid="2911903752046497" type="PeerLaser">
-                                    <param id="0" name="Layer">&quot;Lasers&quot;</param>
-                                </action>
-                                <action id="-26" name="Move to layer" sid="7466844330938105" type="AimSpot">
+                                <action id="-26" name="Move to layer" sid="7466844330938105" type="Target">
                                     <param id="0" name="Layer">&quot;Lasers&quot;</param>
                                 </action>
                                 <action id="-26" name="Move to layer" sid="344509275179337" type="PeerName">
@@ -1115,54 +960,17 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>Similarly to above, the host and peers update their inputs in different ways, but whenever the &apos;shooting&apos; input (bit 4) is set, we want to display the laser to show that they&apos;re shooting.</comment>
-                        <event-block sid="3657601176564042">
+                        <event-block sid="173429715284763">
                             <conditions>
-                                <condition id="-11" name="For Each" sid="4248564936608124" type="System">
-                                    <param id="0" name="Object">Peer</param>
+                                <condition id="1" name="Is overlapping another object" sid="131322796124559" type="Peer">
+                                    <param id="0" name="Object">Target</param>
                                 </condition>
                             </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="2747854862782409">
-                                    <conditions>
-                                        <condition id="-8" name="Compare two values" sid="2863468584174289" type="System">
-                                            <param id="0" name="First value">getbit(Peer.inputs, 4)</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">1</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="529087646234199" type="Peer">
-                                            <param id="0" name="Speed">100</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="4784074445792489" type="PeerLaser">
-                                            <param id="0" name="Object">Peer</param>
-                                            <param id="1" name="Image point (optional)">1</param>
-                                        </action>
-                                        <action id="-22" name="Set angle toward position" sid="9313873539234319" type="PeerLaser">
-                                            <param id="0" name="X">Peer.lookatx</param>
-                                            <param id="1" name="Y">Peer.lookaty</param>
-                                        </action>
-                                        <action id="-5" name="Set width" sid="360013286974248" type="PeerLaser">
-                                            <param id="0" name="Width">distance(PeerLaser.X, PeerLaser.Y, Peer.lookatx, Peer.lookaty)</param>
-                                        </action>
-                                        <action id="-15" name="Set visible" sid="8101732601140227" type="PeerLaser">
-                                            <param id="0" name="Visibility">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="3776654557553521">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="5456220674553035" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-15" name="Set visible" sid="1159169287522366" type="PeerLaser">
-                                            <param id="0" name="Visibility">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
+                            <actions>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="784814322492475" type="Peer">
+                                    <param id="0" name="Speed">0</param>
+                                </action>
+                            </actions>
                         </event-block>
                         <comment>This event is essentially the chat room functionality from tutorial 2. However they are merged in to one event, the only difference being whether we send a message (as a peer) or broadcast it (as the host). The host relay is separated out in to the &apos;Host&apos; group.</comment>
                         <event-block any="1" sid="6476942305419597">
@@ -1253,21 +1061,27 @@
                                 <action id="8" name="Set unfocused" sid="7112764078842695" type="ChatSend" />
                             </actions>
                         </event-block>
-                        <event-block sid="173429715284763">
-                            <conditions>
-                                <condition id="1" name="Is overlapping another object" sid="131322796124559" type="Peer">
-                                    <param id="0" name="Object">AimSpot</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="784814322492475" type="Peer">
-                                    <param id="0" name="Speed">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
                     </sub-events>
                 </event-group>
             </sub-events>
         </event-group>
+        <event-block sid="837100495442882">
+            <conditions>
+                <condition id="0" name="On any touch start" sid="967778211456455" type="Touch" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="795214662463150">
+                    <conditions>
+                        <condition id="-20" name="Is on mobile device" sid="302451328752557" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="10" name="Request fullscreen" sid="929494523437686" type="Browser">
+                            <param id="0" name="Mode">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
     </events>
 </c2eventsheet>

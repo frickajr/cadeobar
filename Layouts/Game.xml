@@ -4,8 +4,8 @@
     <sid>7412787897443627</sid>
     <event-sheet>Game events</event-sheet>
     <size>
-        <width>1024</width>
-        <height>768</height>
+        <width>1280</width>
+        <height>720</height>
     </size>
     <margins>
         <horizontal>500</horizontal>
@@ -40,8 +40,8 @@
                         <x>1</x>
                         <y>0</y>
                         <z>0</z>
-                        <width>1022</width>
-                        <height>766</height>
+                        <width>1281</width>
+                        <height>719</height>
                         <depth>0</depth>
                         <hotspotX>0</hotspotX>
                         <hotspotY>0</hotspotY>
@@ -61,10 +61,6 @@
                         <lookatx>0</lookatx>
                         <lookaty>0</lookaty>
                         <inputs>0</inputs>
-                        <health>100</health>
-                        <kills>0</kills>
-                        <deaths>0</deaths>
-                        <FirstShot>true</FirstShot>
                         <lasthitbypeerid></lasthitbypeerid>
                     </instance-variables>
                     <behavior-instances>
@@ -76,7 +72,7 @@
                                 <directions>8 directions</directions>
                                 <set-angle>No</set-angle>
                                 <default-controls>No</default-controls>
-                                <initial-state>Disabled</initial-state>
+                                <initial-state>Enabled</initial-state>
                             </properties>
                         </behavior-instance>
                         <behavior-instance type="BoundToLayout">
@@ -110,6 +106,28 @@
                         <opacity>1</opacity>
                     </world>
                 </instance>
+                <instance type="Bar" uid="8">
+                    <properties>
+                        <initial-visibility>Visible</initial-visibility>
+                        <initial-animation>Default</initial-animation>
+                        <initial-frame>0</initial-frame>
+                        <collisions>Enabled</collisions>
+                    </properties>
+                    <blend-mode>0</blend-mode>
+                    <effect-fallback>0</effect-fallback>
+                    <world>
+                        <x>741.911376953</x>
+                        <y>160.44128418</y>
+                        <z>0</z>
+                        <width>488.343902588</width>
+                        <height>210.35585022</height>
+                        <depth>0</depth>
+                        <hotspotX>0.507128298</hotspotX>
+                        <hotspotY>0.754137099</hotspotY>
+                        <angle>0</angle>
+                        <opacity>1</opacity>
+                    </world>
+                </instance>
             </instances>
             <effects />
         </layer>
@@ -129,31 +147,9 @@
             <blend-mode>0</blend-mode>
             <effect-fallback>0</effect-fallback>
             <instances>
-                <instance type="PeerLaser" uid="13">
+                <instance type="Target" uid="12">
                     <properties>
-                        <initial-visibility>Visible</initial-visibility>
-                        <initial-animation>Default</initial-animation>
-                        <initial-frame>0</initial-frame>
-                        <collisions>Enabled</collisions>
-                    </properties>
-                    <blend-mode>0</blend-mode>
-                    <effect-fallback>0</effect-fallback>
-                    <world>
-                        <x>-106</x>
-                        <y>120</y>
-                        <z>0</z>
-                        <width>32</width>
-                        <height>8</height>
-                        <depth>0</depth>
-                        <hotspotX>0</hotspotX>
-                        <hotspotY>0.5</hotspotY>
-                        <angle>0</angle>
-                        <opacity>1</opacity>
-                    </world>
-                </instance>
-                <instance type="AimSpot" uid="12">
-                    <properties>
-                        <initial-visibility>Visible</initial-visibility>
+                        <initial-visibility>Invisible</initial-visibility>
                         <initial-animation>Default</initial-animation>
                         <initial-frame>0</initial-frame>
                         <collisions>Enabled</collisions>
@@ -164,33 +160,11 @@
                         <x>158</x>
                         <y>366</y>
                         <z>0</z>
-                        <width>18</width>
-                        <height>18</height>
+                        <width>32</width>
+                        <height>32</height>
                         <depth>0</depth>
                         <hotspotX>0.5</hotspotX>
                         <hotspotY>0.5</hotspotY>
-                        <angle>0</angle>
-                        <opacity>1</opacity>
-                    </world>
-                </instance>
-                <instance type="Bar" uid="8">
-                    <properties>
-                        <initial-visibility>Visible</initial-visibility>
-                        <initial-animation>Default</initial-animation>
-                        <initial-frame>0</initial-frame>
-                        <collisions>Enabled</collisions>
-                    </properties>
-                    <blend-mode>0</blend-mode>
-                    <effect-fallback>0</effect-fallback>
-                    <world>
-                        <x>741.911376953</x>
-                        <y>160.44128418</y>
-                        <z>0</z>
-                        <width>488.343902588</width>
-                        <height>210.35585022</height>
-                        <depth>0</depth>
-                        <hotspotX>0.507128298</hotspotX>
-                        <hotspotY>0.754137099</hotspotY>
                         <angle>0</angle>
                         <opacity>1</opacity>
                     </world>
@@ -257,11 +231,11 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>5</x>
-                        <y>732</y>
+                        <x>272</x>
+                        <y>642</y>
                         <z>0</z>
                         <width>660</width>
-                        <height>29</height>
+                        <height>67</height>
                         <depth>0</depth>
                         <hotspotX>0</hotspotX>
                         <hotspotY>0</hotspotY>
@@ -281,11 +255,11 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>676</x>
-                        <y>733</y>
+                        <x>937</x>
+                        <y>643</y>
                         <z>0</z>
                         <width>75</width>
-                        <height>28</height>
+                        <height>62</height>
                         <depth>0</depth>
                         <hotspotX>0</hotspotX>
                         <hotspotY>0</hotspotY>
@@ -310,7 +284,7 @@
                         <y>4</y>
                         <z>0</z>
                         <width>435</width>
-                        <height>695</height>
+                        <height>714</height>
                         <depth>0</depth>
                         <hotspotX>0</hotspotX>
                         <hotspotY>0</hotspotY>
@@ -333,8 +307,8 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>770</x>
-                        <y>628</y>
+                        <x>1027</x>
+                        <y>582</y>
                         <z>0</z>
                         <width>247</width>
                         <height>132</height>

@@ -107,5 +107,23 @@
                 </event-block>
             </sub-events>
         </event-block>
+        <event-block sid="898153712364091">
+            <conditions>
+                <condition id="0" name="On any touch start" sid="911451876645622" type="Touch" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="982194091149331">
+                    <conditions>
+                        <condition id="-20" name="Is on mobile device" sid="289602414570326" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="10" name="Request fullscreen" sid="673079627300818" type="Browser">
+                            <param id="0" name="Mode">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
     </events>
 </c2eventsheet>
